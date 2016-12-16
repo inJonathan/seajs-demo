@@ -1,0 +1,36 @@
+<!doctype html>
+<html lang="en">
+
+    <head>
+        <meta charset="UTF-8" />
+        <title>Hello Sea.js</title>
+    </head>
+
+    <body>
+        <button class="test-btn">test run</button>
+        <button class="show-btn">show name</button>
+        <input type="text" id="myName" placeholder="write yourname" />
+        <p class="container"></p>
+
+        <script src="js/sea.js"></script>
+        <script>
+            seajs.use(['jquery.seajs', 'otherjs'], function($, otherjs) { // 加载模块，以及加载完成后的回调
+
+                $(".test-btn").click(function() {
+                    alert('seajs is run');
+                });
+
+                $(".show-btn").click(function() {
+                    var yourname = $("#myName").val();
+                    yourname.length > 0 ? yourname = yourname : yourname = 'Jonathan'; // 三目运算设置默认值
+                    otherjs.showName(yourname); // 调用接口
+                });
+
+                //console.log(obj); // 直接访问会报错，因为相关js模块没有提供接口
+                console.log(otherjs.obj); // 这样才可以访到相关js模块中的变量
+                
+            });
+        </script>
+    </body>
+
+</html>
